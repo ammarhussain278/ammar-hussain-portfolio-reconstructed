@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects.js';
+const selected = projects.slice(0,6);
+---
+<BaseLayout>
+  <Header />
+  <main id="main">
+    <section class="hero shell">
+      <div class="eyebrow">GRAPHIC DESIGN / SELECTED WORK <span>INDEPENDENT STUDIES, 2026</span></div>
+      <h1>Good design.<br/><em>In every detail.</em></h1>
+      <p class="lede">Brand systems, campaigns and publications designed for the places people actually use them.</p>
+      <div class="actions"><a class="button" href="#selected">View selected work ↓</a><a class="text-link" href="#contact">Start a project ↗</a></div>
+    </section>
+
+    <section id="selected" class="shell section-block">
+      <div class="section-head"><p>SELECTED WORK</p><h2>Six ways a system can hold together.</h2></div>
+      <div class="project-grid">{selected.map((project, i) => <ProjectCard project={project} featured={i===0} />)}</div>
+      <p class="collection-link"><a href="/work">Explore the full collection — 26 projects ↗</a></p>
+    </section>
+
+    <section id="services" class="shell section-block services">
+      <div class="section-head"><h2>What I design.</h2><p>From the first identity decision to the last production file.</p></div>
+      <div class="service-grid">
+        {[['01','Brand Identity','Logo systems, colour, typography, guidelines, stationery and applications that stay consistent in use.'],['02','Social & Campaign Design','Feed posts, carousels, stories, paid-ad variants, thumbnails and reusable campaign templates.'],['03','Presentation & Information Design','Pitch and sales decks, corporate presentations, editable charts, diagrams and slide systems.'],['04','Editorial & Publication','eBooks, workbooks, reports, book covers, interiors and digital publications with a clear reading order.'],['05','Print & Packaging','Brochures, company profiles, catalogues, menus, posters, labels and product packaging families.'],['06','Digital & Web Graphics','Landing-page visual direction, hero artwork, banners, interface systems and responsive layouts.']].map(s => <article><span>{s[0]}</span><h3>{s[1]}</h3><p>{s[2]}</p></article>)}
+      </div>
+      <p class="toolkit"><strong>Also in the toolkit</strong><br/>Image editing & retouching · Canva-ready systems · Illustration direction · Motion graphics</p>
+    </section>
+
+    <section id="about" class="shell section-block split">
+      <div><p class="eyebrow">ABOUT AMMAR</p><h2>A clear idea.<br/>A useful system.<br/><em>The details intact.</em></h2></div>
+      <div class="copy"><p>I’m Ammar Hussain, a graphic designer working across identity, campaigns, presentations, publications and digital design.</p><p>I care about what happens after the first mockup: how a label reads at a smaller size, how a paragraph sits on a page, and how another person can reuse a template.</p><p>This collection brings together independent design studies. Each shows the brief, the decisions and the resulting system. Concept imagery and illustrative data are identified where used.</p><p>Actual outputs include editable vector layouts, PDF publications, a native PowerPoint deck, code-based motion and this website. Native Adobe, Figma and Canva source files are not claimed.</p><p><a href="https://ammar-hussain-design.uzain818062.chatgpt.site/downloads/Ammar_Hussain_Graphic_Design_Portfolio.pdf">Download portfolio PDF ↗</a></p></div>
+    </section>
+
+    <section id="process" class="shell section-block">
+      <div class="section-head"><h2>How the work<br/>takes shape.</h2><p>A practical sequence. Clear decisions at each stage.</p></div>
+      <div class="process-grid">{[['01','Discover','Review the audience, content, formats and production constraints. Agree what the work needs to make clear.'],['02','Direction','Explore distinct approaches. Compare the trade-offs with the brief before developing one system.'],['03','Design','Build the core elements and test them in real applications with realistic copy and image crops.'],['04','Refine','Consolidate feedback, resolve hierarchy and check the details across every required format.'],['05','Deliver','Prepare editable sources and exports with clear naming, usage notes and production requirements.']].map(x=><article><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div>
+    </section>
+
+    <section id="contact" class="contact"><div class="shell"><p>A PROJECT IN MIND?</p><h2>Let’s make it<br/><em>clearer.</em></h2><p>Have a brand, campaign or document that needs a clearer visual system?</p><p class="muted">Copy a short brief to start the conversation. Direct contact and Upwork link will be added once verified.</p></div></section>
+  </main>
+  <Footer />
+</BaseLayout>

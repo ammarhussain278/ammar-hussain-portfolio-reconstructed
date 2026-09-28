@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { projects } from '../../data/projects.js';
+export function getStaticPaths(){ return projects.map(project => ({params:{slug:project.slug}, props:{project}})); }
+const { project } = Astro.props;
+const next = projects.find(p => p.slug === project.nextSlug);
+const problem = project.problem ?? `This study explores how ${project.description.toLowerCase()} can become a repeatable visual system.`;
+const direction = project.direction ?? `The direction prioritises clear hierarchy, useful spacing and a distinctive visual language appropriate to ${project.category.toLowerCase()}.`;
+const system = project.system ?? `The system tests the concept across multiple applications so the work can be judged beyond a single hero mockup.`;
+const delivery = project.delivery ?? `Prepared as a self-initiated production study with editable layouts and presentation-ready exports.`;
+---
+<BaseLayout title={`${project.title} — Ammar Hussain`} description={project.description}>
+  <Header />
+  <main id="main" class="project-page">
+    <section class="project-hero shell">
+      <p><a href="/work">← Work index</a></p>
+      <h1>{project.title}</h1>
+      <div class="project-kicker"><span>{project.category}</span><span>{project.year}</span></div>
+      <p class="project-description">{project.description}</p>
+      <dl class="project-facts"><div><dt>STATUS</dt><dd>{project.status}</dd></div><div><dt>ROLE</dt><dd>{project.role}</dd></div><div><dt>OUTPUT</dt><dd>{project.output}</dd></div></dl>
+    </section>
+
+    <section class="project-cover"><img src={project.cover} alt={`${project.title} cover visual`} /></section>
+
+    <section class="shell project-story">
+      <p class="eyebrow">CONTEXT / PROBLEM</p><h2>{problem}</h2>
+      <div class="story-columns"><div><h3>Creative direction</h3><p>{direction}</p></div><div><h3>The system</h3><p>{system}</p></div></div>
+    </section>
+
+    <section class="gallery shell">{project.images.slice(1).map((src,i)=><figure><a href={src} target="_blank" rel="noreferrer"><img src={src} alt={`${project.title} project page ${i+2}`} loading="lazy" /></a><figcaption>{String(i+2).padStart(2,'0')} / {project.title}</figcaption></figure>)}</section>
+
+    <section class="shell project-delivery"><p class="eyebrow">PRODUCTION / DELIVERY</p><h2>Made to be used again.</h2><p>{delivery}</p><h3>Design outcome</h3><p>The finished study demonstrates a repeatable design system and production-aware decisions. No measured business result is claimed.</p><p><a href={project.pdf}>View project PDF ↗</a></p></section>
+
+    <section class="next-project"><div class="shell"><p>NEXT PROJECT</p><h2><a href={`/work/${next.slug}`}>{next.title} ↗</a></h2></div></section>
+  </main>
+  <Footer />
+</BaseLayout>

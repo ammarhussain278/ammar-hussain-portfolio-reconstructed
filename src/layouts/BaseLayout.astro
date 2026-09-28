@@ -1,0 +1,22 @@
+---
+import '../styles/global.css';
+const { title = 'Ammar Hussain — Graphic Designer', description = 'Brand identity, campaigns, presentations, publications, packaging and digital design.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+    <script is:inline>
+      document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+        const id=a.getAttribute('href'); if(id && id.length>1){ const el=document.querySelector(id); if(el){e.preventDefault(); el.scrollIntoView({behavior:'smooth'});} }
+      }));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects.js';
+---
+<BaseLayout title="Work index — Ammar Hussain">
+  <Header />
+  <main id="main" class="shell work-index">
+    <div class="index-intro"><p>THE COMPLETE COLLECTION / 2026</p><h1>Work, in detail.</h1><p>Identity, campaigns, documents and digital systems. All projects are self-initiated design studies.</p><strong>26 projects</strong></div>
+    <div class="project-grid index-grid">{projects.map(project => <ProjectCard project={project} />)}</div>
+  </main>
+  <Footer />
+</BaseLayout>
